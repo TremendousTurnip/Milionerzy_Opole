@@ -7,6 +7,8 @@ import random
 from tkinter import *
 from tkinter import messagebox
 from functools import partial
+from Pytanka import pytania # zaimportowanie pytań z zewnętrznego pliku
+from Pytanka import odpowiedzi # zaimportowanie odpowiedzi z zewnętrznego pliku
 
 # Na tę chwilę nasz program składa się z jednego okna.
 # Poniższy zapis umożliwia względnie sprawne dołączenie ewentualnych dodatkowych
@@ -164,8 +166,7 @@ class AplikacjaGUI(Frame, object):
     # -> wyświetla nowe pytanie
 
     def baza_pytan(self, nr_pytania):
-        lista_pytan = ["pytanie1", "pytanie2", "pytanie3", "pytanie4", "pytanie5",
-        "pytanie6", "pytanie7", "pytanie8", "pytanie9", "pytanie10", "pytanie11", "pytanie12"]
+        lista_pytan = pytania
         self.pytanie.configure(text = lista_pytan[nr_pytania])
 
     # 5: baza_odpowiedzi
@@ -173,20 +174,7 @@ class AplikacjaGUI(Frame, object):
     # -> wywołuje funkcję determinującą zachowanie przycisków (ABCD) w danej rundzie
 
     def baza_odpowiedzi(self, nr_pytania):
-        lista_odpowiedzi = [
-                    ["POPRAWNA", "1 odp. B ", "1 odp. C", "1 odp. D"],
-                    ["2 odp. A", "POPRAWNA", "2 odp. C", "2 odp. D"],
-                    ["3 odp. A", "3 odp. B", "POPRAWNA", "3 odp. D"],
-                    ["4 odp. A", "4 odp. B", "4 odp. C", "POPRAWNA"],
-                    ["POPRAWNA", "5 odp. B", "5 odp. C", "5 odp. D"],
-                    ["6 odp. A", "POPRAWNA", "6 odp. C", "6 odp. D"],
-                    ["7 odp. A", "7 odp. B", "POPRAWNA", "7 odp. D"],
-                    ["8 odp. A", "8 odp. B", "8 odp. C", "POPRAWNA"],
-                    ["POPRAWNA", "9 odp. B", "9 odp. C", "9 odp. D"],
-                    ["10 odp. A", "POPRAWNA", "10 odp. C", "10 odp. D"],
-                    ["11 odp. A", "11 odp. B", "POPRAWNA", "11 odp. D"],
-                    ["12 odp. A", "12 odp. B", "12 odp. C", "POPRAWNA"],]
-
+        lista_odpowiedzi = odpowiedzi
         for i in range(4):
             self.odpowiedzi[i].configure(text = lista_odpowiedzi[nr_pytania][i])
 
