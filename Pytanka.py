@@ -1,4 +1,4 @@
-pytania = ["Który z tych kolorów jest zielony?", "Pracować można:", "Tasmania to najmniejszy stan:",
+rozgrywka_pytania = ["Który z tych kolorów jest zielony?", "Pracować można:", "Tasmania to najmniejszy stan:",
                        "Która z liter jest międzynarodowym symbolem wschodu jako strony świata?", "Jaki podatek zapłaci w Polsce osoba fizyczna, jeśli wpadnie w drugi próg podatkowy?",
                         "Które z państw na bliskim wschodzie nie graniczy z żadnym pozostałym?", "Co jest prawdą o armii terakotowej?",
                        "Którą planetę planuje skolonizować jako pierwszą Elon Musk?", "Kto był przywódcą chłopów podczas rabacji galicyjskiej w 1846 roku?",
@@ -6,7 +6,7 @@ pytania = ["Który z tych kolorów jest zielony?", "Pracować można:", "Tasmani
                        "CMYK-cyan, magenta, yellow, key - to zestaw podstawowych kolorów farb drukarskich. Co oznacza key?"]
 
 
-odpowiedzi = [
+rozgrywka_odpowiedzi = [
                     ["A.Malachitowy (p) ", "B.Kanarkowy ", "C.Kasztanowy ", "D.Fiołkowy"],
                     ["A.na półnutę", "B.na akord(p)", "C.na bemol", "D.na hejnał"],
                     ["A.USA", "B.Kanady", "C.Australii (p)", "D.Nowej Zelandii"],
@@ -21,7 +21,7 @@ odpowiedzi = [
                     ["A.brązowy", "B.czerwony", "C.biały", "D.czarny (p)"]]
 
 
-sprawdzenie = [["tak","nie","nie","nie"], ["nie","tak","nie","nie"],
+rozgrywka_sprawdzenie = [["tak","nie","nie","nie"], ["nie","tak","nie","nie"],
     ["nie","nie","tak","nie"], ["nie","nie","nie","tak"], ["tak","nie","nie","nie"],
     ["nie","tak","nie","nie"], ["nie","nie","tak","nie"], ["nie","nie","nie","tak"],
     ["tak","nie","nie","nie"], ["nie","tak","nie","nie"], ["nie","nie","tak","nie"],
