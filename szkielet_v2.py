@@ -1,12 +1,14 @@
 ### POPRAWIONA WERSJA PORAWIONEJ WERSJI ##
 ### Data stworzenia: 28.05.2020.
 
-import time
 import random
 
 from tkinter import *
 from tkinter import messagebox
 from functools import partial
+from Pytanka import rozgrywka_pytania # zaimportowanie pytań z zewnętrznego pliku
+from Pytanka import rozgrywka_odpowiedzi # zaimportowanie odpowiedzi z zewnętrznego pliku
+from Pytanka import rozgrywka_sprawdzenie # zaimportowanie odpowiedzi z zewnętrznego pliku
 
 # Na tę chwilę nasz program składa się z jednego okna.
 # Poniższy zapis umożliwia względnie sprawne dołączenie ewentualnych dodatkowych
@@ -40,6 +42,9 @@ class AplikacjaGUI(Frame, object):
         self.Guziki_z_Wygranymi(master)
         self.Kola_Ratunkowe(master)
 
+        self.pula_pytan = rozgrywka_pytania
+        self.pula_odpowiedzi = rozgrywka_odpowiedzi
+        self.pula_sprawdzen = rozgrywka_sprawdzenie
 
     #===========================================#
     #                                           #
@@ -137,6 +142,7 @@ class AplikacjaGUI(Frame, object):
     # -> na każdy przycisk z $$$ można kliknąć tylko raz
     #    (stąd: DISABLED po jej wykonaniu)
 
+
     def poczatek_gry(self, nr_pytania):
         self.czyszczenie_pol()
         self.guziki[nr_pytania].configure(bg = "#852EBA")
@@ -164,32 +170,15 @@ class AplikacjaGUI(Frame, object):
     # -> wyświetla nowe pytanie
 
     def baza_pytan(self, nr_pytania):
-        lista_pytan = ["pytanie1", "pytanie2", "pytanie3", "pytanie4", "pytanie5",
-        "pytanie6", "pytanie7", "pytanie8", "pytanie9", "pytanie10", "pytanie11", "pytanie12"]
-        self.pytanie.configure(text = lista_pytan[nr_pytania])
+        self.pytanie.configure(text = self.pula_pytan[nr_pytania])
 
     # 5: baza_odpowiedzi
     # -> wyświetla warianty odpowiedzi (ABCD)
     # -> wywołuje funkcję determinującą zachowanie przycisków (ABCD) w danej rundzie
 
     def baza_odpowiedzi(self, nr_pytania):
-        lista_odpowiedzi = [
-                    ["POPRAWNA", "1 odp. B ", "1 odp. C", "1 odp. D"],
-                    ["2 odp. A", "POPRAWNA", "2 odp. C", "2 odp. D"],
-                    ["3 odp. A", "3 odp. B", "POPRAWNA", "3 odp. D"],
-                    ["4 odp. A", "4 odp. B", "4 odp. C", "POPRAWNA"],
-                    ["POPRAWNA", "5 odp. B", "5 odp. C", "5 odp. D"],
-                    ["6 odp. A", "POPRAWNA", "6 odp. C", "6 odp. D"],
-                    ["7 odp. A", "7 odp. B", "POPRAWNA", "7 odp. D"],
-                    ["8 odp. A", "8 odp. B", "8 odp. C", "POPRAWNA"],
-                    ["POPRAWNA", "9 odp. B", "9 odp. C", "9 odp. D"],
-                    ["10 odp. A", "POPRAWNA", "10 odp. C", "10 odp. D"],
-                    ["11 odp. A", "11 odp. B", "POPRAWNA", "11 odp. D"],
-                    ["12 odp. A", "12 odp. B", "12 odp. C", "POPRAWNA"],]
-
         for i in range(4):
-            self.odpowiedzi[i].configure(text = lista_odpowiedzi[nr_pytania][i])
-
+            self.odpowiedzi[i].configure(text = self.pula_odpowiedzi[nr_pytania][i])
         self.sprawdz_odpowiedz(nr_pytania)
 
     # 6: sprawdz_odpowiedz
@@ -197,40 +186,29 @@ class AplikacjaGUI(Frame, object):
     #    inaczej mówiąc: określa na jaki kolor ma się zmienić odpowiedź po jej kliknięciu
 
     def sprawdz_odpowiedz(self, nr_pytania):
-        lista_sprawdzajaca = [["tak","nie","nie","nie"], ["nie","tak","nie","nie"],
-            ["nie","nie","tak","nie"], ["nie","nie","nie","tak"], ["tak","nie","nie","nie"],
-            ["nie","tak","nie","nie"], ["nie","nie","tak","nie"], ["nie","nie","nie","tak"],
-            ["tak","nie","nie","nie"], ["nie","tak","nie","nie"], ["nie","nie","tak","nie"],
-            ["nie","nie","nie","tak"]]
-
-    ### Na razie jest to zrobione w ten sposób, ale lepiej byłoby wprowadzić tu element losowości.
-    ### Wiecie, żeby nie było tak, że np. zawsze odpowiedzią na trzecie pytanie jest C.
-
         for i in range(4):
-            if lista_sprawdzajaca[nr_pytania][i] == "tak":
+            if self.pula_sprawdzen[nr_pytania][i] == "tak":
                 self.odpowiedzi[i].configure(command = partial(self.reakcja_odpowiedz, i, "prawidłowa", nr_pytania))
             else:
-                self.odpowiedzi[i].configure(command = partial(self.reakcja_odpowiedz, i, "zła", nr_pytania))
-
+                self.odpowiedzi[i].configure(command = partial(self.reakcja_odpowiedz, i, "nieprawidłowa", nr_pytania))
     # 7: reakcja_odpowiedz
     # -> zmienia kolor naciśniętej odpowiedzi
     #    na zielono, jeśli odpowiedź jest dobra
     #    na czerwono, jeśli jest zła
     # -> wywołuje funkcję wyświetlającą okienko z informacją o dobrej/złej odpowiedzi
 
-
     def reakcja_odpowiedz(self, ktora_odpowiedz, czy_dobra, nr_pytania):
-
+        for i in range(4):
+            if i != ktora_odpowiedz:
+                self.odpowiedzi[i].configure(text = "")
         for i in range(4):
             if i == ktora_odpowiedz:
                 if czy_dobra == "prawidłowa":
                     self.odpowiedzi[i].configure(bg = "green", command = "")
                     self.info_dobra_odpowiedz(nr_pytania)
-                else:
+                elif czy_dobra == "nieprawidłowa":
                     self.odpowiedzi[i].configure(bg = "red", command = "")
                     self.przegrana()
-            else:
-                self.odpowiedzi[i].configure(text = "", command = "")
 
     # 8: info_dobra_odpowiedz
     # -> okienko z informacją o poprawnej odpowiedzi
