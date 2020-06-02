@@ -70,7 +70,6 @@ class AplikacjaGUI(Frame, object):
 
     def Kola_Ratunkowe(self, master):
 
-
     #
     #           KOŁA
     #

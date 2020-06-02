@@ -1,4 +1,4 @@
-### Data stworzenia: 03.06.2020.
+### Data stworzenia: 02.06.2020.
 
 import random
 
@@ -13,7 +13,6 @@ from Pytanka import rozgrywka_sprawdzenie # zaimportowanie odpowiedzi z zewnętr
 # Poniższy zapis umożliwia względnie sprawne dołączenie ewentualnych dodatkowych
 # okien, np. okna z widokiem menu początkowego czy okna z widokiem po zakończeniu gry.
 # Jeśli ktoś z Was czuje, że ma niewystarczająco do zrobienia, to może się nimi zająć.
-
 # Wykorzystałam formę zapisu z prezentacji nr 24 (opcja: za pomocą klas).
 
 class AplikacjaGUI(Frame, object):
