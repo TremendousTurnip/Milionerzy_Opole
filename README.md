@@ -1,2 +1,12 @@
-# Milionerzy_Opole
-Projekt "Milionerzy" grupy Opole
+# Opole: „Milionerzy”
+
+Projekt symulatora teleturnieju ***Milionerzy*** autorstwa grupy ***Opole***.
+
+**Twórcy:** <br />
+[@marys00](https://github.com/marys00) <br />
+[@mgdln-ndbl](https://github.com/mgdln-ndbl) <br />
+[@damiandusza-1](https://github.com/damiandusza-1) <br />
+[@TremendousTurnip](https://github.com/TremendousTurnip)
+
+**Konspekt:** <br />
+[tablica z planem działania.](https://miro.com/app/board/o9J_krrMYp8=/)
