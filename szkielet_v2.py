@@ -9,6 +9,7 @@ from tkinter import messagebox
 from functools import partial
 from Pytanka import pytania # zaimportowanie pytań z zewnętrznego pliku
 from Pytanka import odpowiedzi # zaimportowanie odpowiedzi z zewnętrznego pliku
+from Pytanka import sprawdzenie # zaimportowanie odpowiedzi z zewnętrznego pliku
 
 # Na tę chwilę nasz program składa się z jednego okna.
 # Poniższy zapis umożliwia względnie sprawne dołączenie ewentualnych dodatkowych
@@ -185,14 +186,7 @@ class AplikacjaGUI(Frame, object):
     #    inaczej mówiąc: określa na jaki kolor ma się zmienić odpowiedź po jej kliknięciu
 
     def sprawdz_odpowiedz(self, nr_pytania):
-        lista_sprawdzajaca = [["tak","nie","nie","nie"], ["nie","tak","nie","nie"],
-            ["nie","nie","tak","nie"], ["nie","nie","nie","tak"], ["tak","nie","nie","nie"],
-            ["nie","tak","nie","nie"], ["nie","nie","tak","nie"], ["nie","nie","nie","tak"],
-            ["tak","nie","nie","nie"], ["nie","tak","nie","nie"], ["nie","nie","tak","nie"],
-            ["nie","nie","nie","tak"]]
-
-    ### Na razie jest to zrobione w ten sposób, ale lepiej byłoby wprowadzić tu element losowości.
-    ### Wiecie, żeby nie było tak, że np. zawsze odpowiedzią na trzecie pytanie jest C.
+        lista_sprawdzajaca = sprawdzenie
 
         for i in range(4):
             if lista_sprawdzajaca[nr_pytania][i] == "tak":

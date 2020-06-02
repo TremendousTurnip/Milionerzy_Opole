@@ -19,5 +19,10 @@ odpowiedzi = [
                     ["A.stopu", "B.pozycyjne (p)", "C.awaryjne", "D.drogowe"],
                     ["A.dzikich koni", "B.afrykańskich lwów", "C.hien cętkowanych (p)", "D.goryli górskich"],
                     ["A.brązowy", "B.czerwony", "C.biały", "D.czarny (p)"]]
-                    
-        
+
+
+sprawdzenie = [["tak","nie","nie","nie"], ["nie","tak","nie","nie"],
+    ["nie","nie","tak","nie"], ["nie","nie","nie","tak"], ["tak","nie","nie","nie"],
+    ["nie","tak","nie","nie"], ["nie","nie","tak","nie"], ["nie","nie","nie","tak"],
+    ["tak","nie","nie","nie"], ["nie","tak","nie","nie"], ["nie","nie","tak","nie"],
+    ["nie","nie","nie","tak"]]
