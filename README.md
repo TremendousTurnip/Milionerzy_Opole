@@ -18,4 +18,5 @@ Projekt symulatora teleturnieju ***Milionerzy*** autorstwa grupy ***Opole***.
  	✻ wersje archiwialne plików.
 
 **Dźwięki:** <br />
-[Sound Bible](http://soundbible.com).
+[SoundBible](http://soundbible.com)<br />
+[ZapSplat](https://www.zapsplat.com)
