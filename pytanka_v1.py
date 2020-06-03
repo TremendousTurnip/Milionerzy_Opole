@@ -1,12 +1,9 @@
-# by Marysia
-
 rozgrywka_pytania = ["Który z tych kolorów jest zielony?", "Pracować można:", "Tasmania to najmniejszy stan:",
                        "Która z liter jest międzynarodowym symbolem wschodu jako strony świata?", "Jaki podatek zapłaci w Polsce osoba fizyczna, jeśli wpadnie w drugi próg podatkowy?",
                         "Które z państw na bliskim wschodzie nie graniczy z żadnym pozostałym?", "Co jest prawdą o armii terakotowej?",
                        "Którą planetę planuje skolonizować jako pierwszą Elon Musk?", "Kto był przywódcą chłopów podczas rabacji galicyjskiej w 1846 roku?",
                        "Które światła powinien mieć włączony samochód, który jest holowany podczas złej widoczności?", "Samice przewodzą stadu:",
                        "CMYK-cyan, magenta, yellow, key - to zestaw podstawowych kolorów farb drukarskich. Co oznacza key?"]
-
 
 rozgrywka_odpowiedzi = [
                     ["A.Malachitowy (p) ", "B.Kanarkowy ", "C.Kasztanowy ", "D.Fiołkowy"],
