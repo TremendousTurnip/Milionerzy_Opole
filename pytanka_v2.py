@@ -234,3 +234,4 @@ for i in range(12): # do gry potrzebujemy tylko 12 pytań
     rozgrywka_pytania.append(pytania[numer_pytania])
     rozgrywka_odpowiedzi.append(odpowiedzi[numer_pytania])
     rozgrywka_sprawdzenie.append(sprawdzenie[numer_pytania])
+    
