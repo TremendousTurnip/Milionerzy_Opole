@@ -6,9 +6,9 @@ import random
 from tkinter import *
 from tkinter import messagebox
 from functools import partial
-from Pytanka import rozgrywka_pytania # zaimportowanie pytań z zewnętrznego pliku
-from Pytanka import rozgrywka_odpowiedzi # zaimportowanie odpowiedzi z zewnętrznego pliku
-from Pytanka import rozgrywka_sprawdzenie # zaimportowanie odpowiedzi z zewnętrznego pliku
+from Pytanka import pytania_all # zaimportowanie pytań z zewnętrznego pliku
+from Pytanka import odpowiedzi_all # zaimportowanie odpowiedzi z zewnętrznego pliku
+from Pytanka import sprawdzenie_all # zaimportowanie odpowiedzi z zewnętrznego pliku
 from PIL import Image, ImageTk # dodawanie obrazków
 import pygame # do dźwięku
 pygame.mixer.init()
@@ -33,7 +33,22 @@ class AplikacjaGUI_1(Frame, object):
     def zacznij_gre(self):
         self.master.destroy()
         Glowne_Okno = Tk()
-        ekran_2 = AplikacjaGUI_2(Glowne_Okno) # wywołanie klasy
+
+        rozgrywka_pytania = []
+        rozgrywka_odpowiedzi = []
+        rozgrywka_sprawdzenie = []
+        wylosowane_pytania = []
+
+        for i in range(12): # do gry potrzebujemy tylko 12 pytań
+            numer_pytania = random.randint(0,39)
+            while numer_pytania in wylosowane_pytania: # nie może wylosować 2 razy tego samego pytania
+                numer_pytania = random.randint(0,39)
+            wylosowane_pytania.append(numer_pytania)
+            rozgrywka_pytania.append(pytania_all[numer_pytania])
+            rozgrywka_odpowiedzi.append(odpowiedzi_all[numer_pytania])
+            rozgrywka_sprawdzenie.append(sprawdzenie_all[numer_pytania])
+
+        ekran_2 = AplikacjaGUI_2(Glowne_Okno, rozgrywka_pytania, rozgrywka_odpowiedzi, rozgrywka_sprawdzenie) # wywołanie klasy
         Glowne_Okno.mainloop()
 
     def zamknij_program(self):
@@ -49,7 +64,7 @@ class AplikacjaGUI_2(Frame, object):
     #                                           #
     #===========================================#
 
-    def __init__(self, master):
+    def __init__(self, master, pyt, odp, spr):
         super(AplikacjaGUI_2, self).__init__(master)
         self.master.title("Milionerzy.") # "Nazwa okna, w którym wyświetla się program".
         self.master.geometry("900x650") # "szerokośćxwysokość"
@@ -59,15 +74,16 @@ class AplikacjaGUI_2(Frame, object):
         # Prowadzący Aktualne_Pytanie, Warianty_Odpowiedzi,
         # Guziki_z_Wygranymi i Kola_Ratunkowe.
 
+        self.pula_pytan = pyt
+        self.pula_odpowiedzi = odp
+        self.pula_sprawdzen = spr
+
+
         self.Prowadzacy(master)
         self.Aktualne_Pytanie(master)
         self.Warianty_Odpowiedzi(master)
         self.Guziki_z_Wygranymi(master)
         self.Kola_Ratunkowe(master)
-
-        self.pula_pytan = rozgrywka_pytania
-        self.pula_odpowiedzi = rozgrywka_odpowiedzi
-        self.pula_sprawdzen = rozgrywka_sprawdzenie
 
     #===========================================#
     #                                           #
