@@ -40,6 +40,7 @@ class AplikacjaGUI_1(Frame, object):
 
     def zacznij_gre(self):
         self.master.destroy()
+        pygame.mixer.music.fadeout(2000)
         Glowne_Okno = Tk()
 
         rozgrywka_pytania = []
