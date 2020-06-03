@@ -205,32 +205,18 @@ p40_s = ["tak", "nie", "nie", "nie"]
 
 # PONIŻSZY FRAGMENT KODU WYBIERA 12 PYTAŃ DO GRY
 
-pytania = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15,
+pytania_all = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15,
 p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30,
 p31, p32, p33, p34, p35, p36, p37, p38, p39, p40]
 
-odpowiedzi = [p1_odp, p2_odp, p3_odp, p4_odp, p5_odp, p6_odp, p7_odp, p8_odp,
+odpowiedzi_all = [p1_odp, p2_odp, p3_odp, p4_odp, p5_odp, p6_odp, p7_odp, p8_odp,
 p9_odp, p10_odp, p11_odp, p12_odp, p13_odp, p14_odp, p15_odp, p16_odp, p17_odp,
 p18_odp, p19_odp, p20_odp, p21_odp, p22_odp, p23_odp, p24_odp, p25_odp, p26_odp,
 p27_odp, p28_odp, p29_odp, p30_odp,p31_odp, p32_odp, p33_odp, p34_odp, p35_odp,
 p36_odp, p37_odp, p38_odp, p39_odp, p40_odp]
 
-sprawdzenie = [p1_s, p2_s, p3_s, p4_s, p5_s, p6_s, p7_s, p8_s,
+sprawdzenie_all = [p1_s, p2_s, p3_s, p4_s, p5_s, p6_s, p7_s, p8_s,
 p9_s, p10_s, p11_s, p12_s, p13_s, p14_s, p15_s, p16_s, p17_s,
 p18_s, p19_s, p20_s, p21_s, p22_s, p23_s, p24_s, p25_s, p26_s,
 p27_s, p28_s, p29_s, p30_s, p31_s, p32_s, p33_s, p34_s, p35_s,
 p36_s, p37_s, p38_s, p39_s, p40_s]
-
-rozgrywka_pytania = []
-rozgrywka_odpowiedzi = []
-rozgrywka_sprawdzenie = []
-
-wylosowane_pytania = []
-for i in range(12): # do gry potrzebujemy tylko 12 pytań
-    numer_pytania = random.randint(0,39)
-    while numer_pytania in wylosowane_pytania: # nie może wylosować 2 razy tego samego pytania
-        numer_pytania = random.randint(0,39)
-    wylosowane_pytania.append(numer_pytania)
-    rozgrywka_pytania.append(pytania[numer_pytania])
-    rozgrywka_odpowiedzi.append(odpowiedzi[numer_pytania])
-    rozgrywka_sprawdzenie.append(sprawdzenie[numer_pytania])
