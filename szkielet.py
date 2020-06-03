@@ -9,7 +9,7 @@ from functools import partial
 from Pytanka import rozgrywka_pytania # zaimportowanie pytań z zewnętrznego pliku
 from Pytanka import rozgrywka_odpowiedzi # zaimportowanie odpowiedzi z zewnętrznego pliku
 from Pytanka import rozgrywka_sprawdzenie # zaimportowanie odpowiedzi z zewnętrznego pliku
-
+from PIL import Image, ImageTk # dodawanie obrazków
 
 # EKRAN STARTOWY:
 class AplikacjaGUI_1(Frame, object):
@@ -96,24 +96,31 @@ class AplikacjaGUI_2(Frame, object):
 
     def Kola_Ratunkowe(self, master):
 
-
     #
     #           KOŁA
-    #
-    #
+    #           command = "###" (trzeba uzupełnić nazwę poleceń)
     #
 
-        #### TEN FRAGMENT MA CHARAKTER ORIENTACYJNY.###
-        ### (później się go wyrzuci).
-        ### Decyzja o tym, jak będą wyglądały koła,
-        ### zależy od osoby, która zajmuje się ich robieniem.
-        self.kola = []
-        self.tekst_kola = ["*publ.", "50:50", "tel."]
-        for i in range(3):
-            self.kola.append(Button(self.master, text = self.tekst_kola[i], relief = RAISED, bg = "#0F0A8C", fg = "white"))
-            self.kola[-1].place(x = 650 + 70*i, y = 50, width=60, height=50)
-        ##########################
+        self.kolo1_obraz = Image.open("1.png")
+        self.kolo1_obraz = self.kolo1_obraz.resize((60, 50))
+        self.kolo1_Tk = ImageTk.PhotoImage(self.kolo1_obraz)
 
+        self.kolo2_obraz = Image.open("2.png")
+        self.kolo2_obraz = self.kolo2_obraz.resize((60, 50))
+        self.kolo2_Tk = ImageTk.PhotoImage(self.kolo2_obraz)
+
+        self.kolo3_obraz = Image.open("3.png")
+        self.kolo3_obraz = self.kolo3_obraz.resize((60, 50))
+        self.kolo3_Tk = ImageTk.PhotoImage(self.kolo3_obraz)
+
+        self.pierwsze_kolo = Button(self.master, text = "", image = self.kolo1_Tk, bg = "#0F0A8C", fg = "white", command = "###")
+        self.pierwsze_kolo.place(x = 650, y = 50, width = 60, height = 50)
+
+        self.drugie_kolo = Button(self.master, text = "", image = self.kolo2_Tk, bg = "#0F0A8C", fg = "white", command = "###")
+        self.drugie_kolo.place(x = 720, y = 50, width = 60, height = 50)
+
+        self.trzecie_kolo = Button(self.master, text = "", image = self.kolo3_Tk, bg = "#0F0A8C", fg = "white", command = "###")
+        self.trzecie_kolo.place(x = 790, y = 50, width = 60, height = 50)
     #============================================================#
 
     def Aktualne_Pytanie(self, master):
