@@ -21,6 +21,8 @@ class AplikacjaGUI_1(Frame, object):
         self.master.geometry("900x650")
         self.master.resizable(width = False, height = False)
         self.stworzWidgety(master)
+        pygame.mixer.music.load("muzyczka_startowa.mp3")
+        pygame.mixer.music.play()
 
     def stworzWidgety(self, master):
 
