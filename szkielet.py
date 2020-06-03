@@ -110,35 +110,103 @@ class AplikacjaGUI_2(Frame, object):
     #
     #            Hubert
     #
-    #
+    ####################################################################################################
 
     def Kola_Ratunkowe(self, master):
+        self.przycisk_publ=Button(self.master, text = "publ", relief = RAISED, state = DISABLED, bg = "#0F0A8C", fg = "white")
+        self.przycisk_publ.place(x = 650 , y = 50, width=60, height=50)
+        self.przycisk_5050=Button(self.master, text = "50/50", relief = RAISED, state = DISABLED, bg = "#0F0A8C", fg = "white")
+        self.przycisk_5050.place(x = 720 , y = 50, width=60, height=50)
+        self.przycisk_tel=Button(self.master, text = "tel", relief = RAISED, state = DISABLED, bg = "#0F0A8C", fg = "white")
+        self.przycisk_tel.place(x = 790 , y = 50, width=60, height=50)
+        self.czy_wykorzystano_publ = False
+        self.czy_wykorzystano_pol = False
+        self.czy_wykorzystano_tel = False
 
-    #
-    #           KOŁA
-    #           command = "###" (trzeba uzupełnić nazwę poleceń)
-    #
+    def wylacz_kola(self):
+        self.przycisk_publ.configure(state = DISABLED)
+        self.przycisk_5050.configure(state = DISABLED)
+        self.przycisk_tel.configure(state = DISABLED)
 
-        self.kolo1_obraz = Image.open("1.png")
-        self.kolo1_obraz = self.kolo1_obraz.resize((60, 50))
-        self.kolo1_Tk = ImageTk.PhotoImage(self.kolo1_obraz)
+    def wlacz_kola(self, nr_pytania):
+        if self.czy_wykorzystano_publ == False:
+            self.przycisk_publ.configure(state = NORMAL, command = partial(self.pytanie_do_publicznosci, nr_pytania))
+        if self.czy_wykorzystano_pol == False:
+            self.przycisk_5050.configure(state = NORMAL, command = partial(self.pol_na_pol, nr_pytania))
+        if self.czy_wykorzystano_tel == False:
+            self.przycisk_tel.configure(state = NORMAL, command = partial(self.telefon_do_przyjaciela, nr_pytania))
 
-        self.kolo2_obraz = Image.open("2.png")
-        self.kolo2_obraz = self.kolo2_obraz.resize((60, 50))
-        self.kolo2_Tk = ImageTk.PhotoImage(self.kolo2_obraz)
+    def pytanie_do_publicznosci(self, nr_pytania):
+        pytania = [0,1,2,3]
+        for i in range(4):
+            if self.pula_sprawdzen[nr_pytania][i] == "tak":
+                prawidlowa = self.pula_odpowiedzi[nr_pytania][i]
+                pytania.remove(i)
+        losowa_bledna = random.randint(0,2)
+        bledna = self.pula_odpowiedzi[nr_pytania][pytania[losowa_bledna]]
+        szansa = 100 - (nr_pytania*3)
+        losowa_ze_stu = random.randint(1,100)
+        if losowa_ze_stu > szansa:
+            odpowiedz = bledna
+        else:
+            odpowiedz = prawidlowa
 
-        self.kolo3_obraz = Image.open("3.png")
-        self.kolo3_obraz = self.kolo3_obraz.resize((60, 50))
-        self.kolo3_Tk = ImageTk.PhotoImage(self.kolo3_obraz)
+        messagebox.showinfo("Pytanie do publicznosci", "Publicznosc sadzi ze odpoweidz to: "+odpowiedz)
+        self.czy_wykorzystano_publ = True
+        self.przycisk_publ.configure(state = DISABLED)
 
-        self.pierwsze_kolo = Button(self.master, text = "", image = self.kolo1_Tk, bg = "#0F0A8C", fg = "white", command = "###")
-        self.pierwsze_kolo.place(x = 650, y = 50, width = 60, height = 50)
+    def pol_na_pol(self, nr_pytania):
+        pytania = [0,1,2,3]
+        for i in range(4):
+            if self.pula_sprawdzen[nr_pytania][i] == "tak":
+                prawidlowa = self.pula_odpowiedzi[nr_pytania][i]
+                pytania.remove(i)
+        losowa_bledna = random.randint(0,2)
+        bledna = self.pula_odpowiedzi[nr_pytania][pytania[losowa_bledna]]
+        messagebox.showinfo("Pol na pol", "Odpowiedz to "+ prawidlowa+"lub "+bledna)
+        self.czy_wykorzystano_pol = True
+        self.przycisk_5050.configure(state = DISABLED)
 
-        self.drugie_kolo = Button(self.master, text = "", image = self.kolo2_Tk, bg = "#0F0A8C", fg = "white", command = "###")
-        self.drugie_kolo.place(x = 720, y = 50, width = 60, height = 50)
+    def telefon_do_przyjaciela(self, nr_pytania):
+        pytania = [0,1,2,3]
+        for i in range(4):
+            if self.pula_sprawdzen[nr_pytania][i] == "tak":
+                prawidlowa = self.pula_odpowiedzi[nr_pytania][i]
+                pytania.remove(i)
+        losowa_bledna = random.randint(0,2)
+        bledna = self.pula_odpowiedzi[nr_pytania][pytania[losowa_bledna]]
+        szansa = 100 - (nr_pytania*4)
+        losowa_ze_stu = random.randint(1,100)
+        if losowa_ze_stu > szansa:
+            odpowiedz = bledna
+        else:
+            odpowiedz = prawidlowa
+        messagebox.showinfo("Telefon do przyjaciela", "Przyjaciel uwaza ze prawdidlowa odpowiedz to: "+odpowiedz)
+        self.czy_wykorzystano_tel = True
+        self.przycisk_tel.configure(state = DISABLED)   
+        #######
+        #dodalem jeszcze linijke do funkcji poczatek_gry()
 
-        self.trzecie_kolo = Button(self.master, text = "", image = self.kolo3_Tk, bg = "#0F0A8C", fg = "white", command = "###")
-        self.trzecie_kolo.place(x = 790, y = 50, width = 60, height = 50)
+#         self.kolo1_obraz = Image.open("1.png")
+#         self.kolo1_obraz = self.kolo1_obraz.resize((60, 50))
+#         self.kolo1_Tk = ImageTk.PhotoImage(self.kolo1_obraz)
+
+#         self.kolo2_obraz = Image.open("2.png")
+#         self.kolo2_obraz = self.kolo2_obraz.resize((60, 50))
+#         self.kolo2_Tk = ImageTk.PhotoImage(self.kolo2_obraz)
+
+#         self.kolo3_obraz = Image.open("3.png")
+#         self.kolo3_obraz = self.kolo3_obraz.resize((60, 50))
+#         self.kolo3_Tk = ImageTk.PhotoImage(self.kolo3_obraz)
+
+#         self.pierwsze_kolo = Button(self.master, text = "", image = self.kolo1_Tk, bg = "#0F0A8C", fg = "white", command = "###")
+#         self.pierwsze_kolo.place(x = 650, y = 50, width = 60, height = 50)
+
+#         self.drugie_kolo = Button(self.master, text = "", image = self.kolo2_Tk, bg = "#0F0A8C", fg = "white", command = "###")
+#         self.drugie_kolo.place(x = 720, y = 50, width = 60, height = 50)
+
+#         self.trzecie_kolo = Button(self.master, text = "", image = self.kolo3_Tk, bg = "#0F0A8C", fg = "white", command = "###")
+#         self.trzecie_kolo.place(x = 790, y = 50, width = 60, height = 50)
     #============================================================#
 
     def Aktualne_Pytanie(self, master):
@@ -193,6 +261,7 @@ class AplikacjaGUI_2(Frame, object):
         self.guziki[nr_pytania].configure(bg = "#852EBA")
         self.nowe_pytanie(nr_pytania)
         self.guziki[nr_pytania].configure(state = DISABLED)
+        self.wlacz_kola(nr_pytania)
 
     # 2: czyszczenie_pol
     # -> czysci pole z pytaniem i 4 pola z odpowiedziami
