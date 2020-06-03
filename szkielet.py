@@ -222,8 +222,14 @@ class AplikacjaGUI_2(Frame, object):
     # -> wywołuje funkcję determinującą zachowanie przycisków (ABCD) w danej rundzie
 
     def baza_odpowiedzi(self, nr_pytania):
-        for i in range(4):
-            self.odpowiedzi[i].configure(text = self.pula_odpowiedzi[nr_pytania][i])
+        # for i in range(4):
+        #     self.odpowiedzi[i].configure(text = self.pula_odpowiedzi[nr_pytania][i])
+
+        self.master.after(1000, lambda: self.odpowiedzi[0].configure(text = self.pula_odpowiedzi[nr_pytania][0]))
+        self.master.after(2000, lambda: self.odpowiedzi[1].configure(text = self.pula_odpowiedzi[nr_pytania][1]))
+        self.master.after(3000, lambda: self.odpowiedzi[2].configure(text = self.pula_odpowiedzi[nr_pytania][2]))
+        self.master.after(4000, lambda: self.odpowiedzi[3].configure(text = self.pula_odpowiedzi[nr_pytania][3]))
+
         self.sprawdz_odpowiedz(nr_pytania)
 
     # 6: sprawdz_odpowiedz
