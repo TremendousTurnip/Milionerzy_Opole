@@ -10,6 +10,8 @@ from Pytanka import rozgrywka_pytania # zaimportowanie pytań z zewnętrznego pl
 from Pytanka import rozgrywka_odpowiedzi # zaimportowanie odpowiedzi z zewnętrznego pliku
 from Pytanka import rozgrywka_sprawdzenie # zaimportowanie odpowiedzi z zewnętrznego pliku
 from PIL import Image, ImageTk # dodawanie obrazków
+import pygame # do dźwięku
+pygame.mixer.init()
 
 # EKRAN STARTOWY:
 class AplikacjaGUI_1(Frame, object):
@@ -243,6 +245,8 @@ class AplikacjaGUI_2(Frame, object):
     # -> zmienia tło zdobytych $$$ na złoty kolor.
 
     def info_dobra_odpowiedz(self, nr_pytania):
+        pygame.mixer.music.load("aplauz.wav")
+        pygame.mixer.music.play()
         messagebox.showinfo("GRATULACJE", "Poprawna odpowiedź!")
         self.guziki[nr_pytania].configure(bg = "gold")
         if nr_pytania != 11: # Dla ostatniego pytania nie ma czego zwolnić.
@@ -260,6 +264,8 @@ class AplikacjaGUI_2(Frame, object):
     # -> zamyka główne okno
 
     def przegrana(self):
+        pygame.mixer.music.load("przegrana.mp3")
+        pygame.mixer.music.play()
         messagebox.showinfo("PORAŻKA", "Przegrałeś :(")
         self.master.destroy()
         ekran_startowy()
