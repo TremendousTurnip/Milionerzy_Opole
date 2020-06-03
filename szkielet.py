@@ -9,6 +9,7 @@ from Pytanka import pytania_all # zaimportowanie pytań z zewnętrznego pliku
 from Pytanka import odpowiedzi_all # zaimportowanie odpowiedzi z zewnętrznego pliku
 from Pytanka import sprawdzenie_all # zaimportowanie odpowiedzi z zewnętrznego pliku
 from PIL import Image, ImageTk # dodawanie obrazków
+import tkinter.font as font # czcionki
 import pygame # do dźwięku
 pygame.mixer.init()
 
@@ -22,12 +23,18 @@ class AplikacjaGUI_1(Frame, object):
         self.stworzWidgety(master)
 
     def stworzWidgety(self, master):
+
+        czcionka_1 = font.Font(family="Naula", size=15, weight="bold", slant="italic")
+
         nowa_gra = Button(self.master, text = "NOWA GRA", relief = RAISED,
-                          bg = "lightblue", fg = "black", command = self.zacznij_gre)
+                          fg = "#ffd750", bg = "#19133d", command = self.zacznij_gre)
+        nowa_gra['font'] = czcionka_1
         nowa_gra.place(x = 350, y = 225, width=200, height=75)
-        koniec = Button(self.master,text = "WYJŚCIE Z PROGRAMU", relief = RAISED,
-                        bg = "lightblue", fg = "black", command = self.zamknij_program)
-        koniec.place(x = 350, y = 300, width=200, height=75)
+
+        koniec = Button(self.master,text = "WYJŚCIE \nZ PROGRAMU", relief = RAISED,
+                        fg = "#ffd750", bg = "#19133d", command = self.zamknij_program)
+        koniec['font'] = czcionka_1
+        koniec.place(x = 350, y = 310, width=200, height=75)
 
     def zacznij_gre(self):
         self.master.destroy()
@@ -321,7 +328,7 @@ class AplikacjaGUI_2(Frame, object):
                     self.info_dobra_odpowiedz(nr_pytania)
                 elif czy_dobra == "nieprawidłowa":
                     self.odpowiedzi[i].configure(bg = "red", command = "")
-                    self.przegrana()
+                    self.przegrana(nr_pytania)
 
     # 8: info_dobra_odpowiedz
     # -> okienko z informacją o poprawnej odpowiedzi
@@ -334,23 +341,59 @@ class AplikacjaGUI_2(Frame, object):
         messagebox.showinfo("GRATULACJE", "Poprawna odpowiedź!")
         self.guziki[nr_pytania].configure(bg = "gold")
         if nr_pytania != 11: # Dla ostatniego pytania nie ma czego zwolnić.
-            self.zwolnij_guzik(nr_pytania + 1)
+            self.czy_chcesz_grac_dalej(nr_pytania)
+        else:
+            self.jestes_milionerem()
 
     # 9: zwolnij_guzik
     # -> dobra odpowiedź umożliwia kliknięcie na kolejną kwotę,
     #    a tym samym: zaczęcie nowej rundy
 
+    def czy_chcesz_grac_dalej(self, nr_pytania):
+        kwoty = ["500 zł", "1000 zł", "2000 zł", "5000 zł", "10 000 zł", "20 000 zł",
+        "40 000 zł", "75 000 zł", "125 000 zł", "250 000 zł", "500 000 zł", "1 000 000 zł"]
+
+        graj_dalej = messagebox.askquestion("Uwaga!", "Obecnie masz w garści: " + str(kwoty[nr_pytania])
+                                           + "\nCzy chcesz kontynuować grę?")
+        if graj_dalej == "yes":
+            self.zwolnij_guzik(nr_pytania + 1)
+        else:
+            messagebox.showinfo("Koniec gry", "Wygrana: " + str(kwoty[nr_pytania]))
+            self.master.destroy()
+            ekran_startowy()
+
     def zwolnij_guzik(self, nr_do_zwolnienia):
         self.guziki[nr_do_zwolnienia].configure(state = NORMAL)
+
+    def jestes_milionerem(self):
+        pygame.mixer.music.load("aplauz.wav")
+        pygame.mixer.music.play()
+        messagebox.showinfo("GRATULACJE", "Wygrałeś milion złotych!")
+        self.master.destroy()
+        ekran_startowy()
 
     # 10: przegrana
     # -> okienko z informacją o przegranej
     # -> zamyka główne okno
 
-    def przegrana(self):
+    def przegrana(self, nr_pytania):
+        poprawna_odpowiedz = 0
+        for i in range(4):
+            if self.pula_sprawdzen[nr_pytania][i] == "tak":
+                poprawna_odpowiedz = self.pula_odpowiedzi[nr_pytania][i]
+
         pygame.mixer.music.load("przegrana.mp3")
         pygame.mixer.music.play()
-        messagebox.showinfo("PORAŻKA", "Przegrałeś :(")
+        messagebox.showinfo("PORAŻKA", "Przegrałeś :( Poprawna odpowiedź: " + str(poprawna_odpowiedz))
+        self.informacja_o_wygranej(nr_pytania)
+
+    def informacja_o_wygranej(self, nr_pytania):
+        if nr_pytania < 2:
+            messagebox.showinfo("WYGRANA", "Twoja wygrana: 0 zł")
+        elif (nr_pytania >= 2 and nr_pytania < 8):
+            messagebox.showinfo("WYGRANA", "Twoja wygrana: gwarantowany 1 000 zł")
+        else:
+            messagebox.showinfo("WYGRANA", "Twoja wygrana: gwarantowane 40 000 zł")
         self.master.destroy()
         ekran_startowy()
 #==========================================================#
