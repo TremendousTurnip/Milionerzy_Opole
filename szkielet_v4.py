@@ -100,8 +100,6 @@ class AplikacjaGUI_2(Frame, object):
     #
     #           KOŁA
     #
-    #
-    #
 
         #### TEN FRAGMENT MA CHARAKTER ORIENTACYJNY.###
         ### (później się go wyrzuci).
