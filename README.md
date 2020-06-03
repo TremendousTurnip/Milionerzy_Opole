@@ -12,7 +12,7 @@ Projekt symulatora teleturnieju ***Milionerzy*** autorstwa grupy ***Opole***.
 [tablica z planem działania.](https://miro.com/app/board/o9J_krrMYp8=/)
 
 **Master:** <br />
-  - pliki niezbędne do działania programu.
+  ✻ pliki niezbędne do działania programu.
 
 **Gałęzie:** <br />
-   - wersje archiwialne plików.
+   ✻ wersje archiwialne plików.
