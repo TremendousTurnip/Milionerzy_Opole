@@ -20,3 +20,12 @@ Projekt symulatora teleturnieju ***Milionerzy*** autorstwa grupy ***Opole***.
 **Dźwięki:** <br />
 [SoundBible](http://soundbible.com)<br />
 [ZapSplat](https://www.zapsplat.com)
+
+**Źródło ikonek:** </br>
+
+Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a><br /> 
+Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a><br /> 
+Icons made by <a href="https://www.flaticon.com/authors/alfredo-hernandez" title="Alfredo Hernandez">Alfredo Hernandez</a><br /> 
+From: <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+
+
