@@ -23,7 +23,6 @@ class AplikacjaGUI(Frame, object):
     #               Konstruktor                 #
     #                                           #
     #===========================================#
-
     def __init__(self, master):
         super(AplikacjaGUI, self).__init__(master)
 
@@ -41,7 +40,6 @@ class AplikacjaGUI(Frame, object):
         self.Guziki_z_Wygranymi(master)
         self.Kola_Ratunkowe(master)
         self.komentarz(master)
-
 
 
     #===========================================#
