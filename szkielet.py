@@ -102,6 +102,10 @@ class AplikacjaGUI_2(Frame, object):
         self.pula_odpowiedzi = odp
         self.pula_sprawdzen = spr
 
+        # Czcionki:
+        self.specjalna_czcionka_2 = font.Font(family="Naula", size=10, weight="bold")
+        self.specjalna_czcionka_3 = font.Font(family="Arial", size=10, weight="bold")
+
         # Główne obszary okna:
         # Prowadzący Aktualne_Pytanie, Warianty_Odpowiedzi,
         # Guziki_z_Wygranymi i Kola_Ratunkowe.
@@ -136,15 +140,15 @@ class AplikacjaGUI_2(Frame, object):
     def Kola_Ratunkowe(self, master):
 
         self.publ_obraz = Image.open("1.png")
-        self.publ_obraz = self.publ_obraz.resize((60, 50))
+        self.publ_obraz = self.publ_obraz.resize((45, 45))
         self.publ_Tk = ImageTk.PhotoImage(self.publ_obraz)
 
         self.pol_na_pol_obraz = Image.open("2.png")
-        self.pol_na_pol_obraz = self.pol_na_pol_obraz.resize((60, 50))
+        self.pol_na_pol_obraz = self.pol_na_pol_obraz.resize((45, 45))
         self.pol_na_pol_Tk = ImageTk.PhotoImage(self.pol_na_pol_obraz)
 
         self.tel_obraz = Image.open("3.png")
-        self.tel_obraz = self.tel_obraz.resize((60, 50))
+        self.tel_obraz = self.tel_obraz.resize((45, 45))
         self.tel_Tk = ImageTk.PhotoImage(self.tel_obraz)
 
 #============================================================#
@@ -155,11 +159,11 @@ class AplikacjaGUI_2(Frame, object):
             #                                        #
             #========================================#
 
-        self.przycisk_publ=Button(self.master, text = "publ", image = self.publ_Tk, relief = RAISED, state = DISABLED, bg = "#0F0A8C", fg = "white")
+        self.przycisk_publ=Button(self.master, text = "publ", image = self.publ_Tk, relief = RAISED, state = DISABLED, fg = "white")
         self.przycisk_publ.place(x = 650 , y = 50, width=60, height=50)
-        self.przycisk_5050=Button(self.master, text = "50/50", image = self.pol_na_pol_Tk, relief = RAISED, state = DISABLED, bg = "#0F0A8C", fg = "white")
+        self.przycisk_5050=Button(self.master, text = "50/50", image = self.pol_na_pol_Tk, relief = RAISED, state = DISABLED, fg = "white")
         self.przycisk_5050.place(x = 720 , y = 50, width=60, height=50)
-        self.przycisk_tel=Button(self.master, text = "tel", image = self.tel_Tk, relief = RAISED, state = DISABLED, bg = "#0F0A8C", fg = "white")
+        self.przycisk_tel=Button(self.master, text = "tel", image = self.tel_Tk, relief = RAISED, state = DISABLED, fg = "white")
         self.przycisk_tel.place(x = 790 , y = 50, width=60, height=50)
         self.czy_wykorzystano_publ = False
         self.czy_wykorzystano_pol = False
@@ -253,10 +257,17 @@ class AplikacjaGUI_2(Frame, object):
         "40 000 zł", "75 000 zł", "125 000 zł", "250 000 zł", "500 000 zł", "1 000 000 zł"]
         for i in range(12):
             self.guziki.append(Button(self.master, text = sumy[i], command = partial(self.poczatek_gry, i),
-            relief = RAISED, state = DISABLED, bg = "#0F0A8C", fg = "white"))
+            relief = RAISED, state = DISABLED, font = self.specjalna_czcionka_2, bg = "#0F0A8C", fg = "white", disabledforeground="white"))
             if i == 0:
                 self.guziki[i].configure(state = NORMAL)
             self.guziki[-1].place(x = 650, y = 562.5 - 40*i, width=200, height=37.5)
+
+        # Strzałka:
+        self.wskaznik_plotno = Canvas(self.master)
+        self.wskaznik_plotno.place(x = 600, y = 562.5, width = 50, height = 37.5)
+        self.wskaznik = Image.open("strzalka.png")
+        self.wskaznik_Tk = ImageTk.PhotoImage(self.wskaznik)
+        self.wskaznik_plotno.create_image(25, 20, image = self.wskaznik_Tk)
 
 #============================================================#
 
@@ -274,13 +285,20 @@ class AplikacjaGUI_2(Frame, object):
 
     def poczatek_gry(self, nr_pytania):
         self.czyszczenie_pol()
-        self.guziki[nr_pytania].configure(bg = "#852EBA")
+        self.guziki[nr_pytania].configure(bg = "#600A51")
         self.komentarz_Huberta(nr_pytania)
         self.nowe_pytanie(nr_pytania)
         self.guziki[nr_pytania].configure(state = DISABLED)
         self.wlacz_kola(nr_pytania)
 
 #============================================================#
+
+            #========================================#
+            #                                        #
+            #               by: Damian               #
+            #                                        #
+            #========================================#
+
     def komentarz_Huberta(self, nr_pytania):
         komentarze = ["Pierwsze pytanie:", "Prawidłowo. Oto kolejne pytanie:",
         "Prawidłowo. Oto kolejne pytanie:",
@@ -373,7 +391,12 @@ class AplikacjaGUI_2(Frame, object):
         pygame.mixer.music.load("aplauz.wav")
         pygame.mixer.music.play()
         messagebox.showinfo("GRATULACJE", "Poprawna odpowiedź!")
-        self.guziki[nr_pytania].configure(bg = "gold")
+        if not (nr_pytania == 1 or nr_pytania == 6):
+            self.guziki[nr_pytania].configure(bg = "lightblue", disabledforeground="darkblue")
+        elif nr_pytania == 1:
+            self.guziki[nr_pytania].configure(text = "Gwarantowany 1000 zł", bg = "gold", font = self.specjalna_czcionka_3, disabledforeground="darkblue")
+        elif nr_pytania == 6:
+            self.guziki[nr_pytania].configure(text = "Gwarantowane 40 000 zł", bg = "gold", font = self.specjalna_czcionka_3, disabledforeground="darkblue")
         if nr_pytania != 11: # Dla ostatniego pytania nie ma czego zwolnić.
             self.czy_chcesz_grac_dalej(nr_pytania)
         else:
@@ -390,7 +413,16 @@ class AplikacjaGUI_2(Frame, object):
         graj_dalej = messagebox.askquestion("Uwaga!", "Obecnie masz w garści: " + str(kwoty[nr_pytania])
                                            + "\nCzy chcesz kontynuować grę?")
         if graj_dalej == "yes":
+            self.wskaznik_plotno.destroy() # Usunięcie strzałki.
+
+            # Nowa strzałka:
+            self.wskaznik_plotno = Canvas(self.master)
+            wartosc_przesuniecia = 522.5 - 40 * int(nr_pytania)
+            self.wskaznik_plotno.place(x = 600, y = wartosc_przesuniecia, width = 50, height = 37.5)
+            self.wskaznik_plotno.create_image(25, 20, image = self.wskaznik_Tk)
+
             self.zwolnij_guzik(nr_pytania + 1)
+
         else:
             messagebox.showinfo("Koniec gry", "Wygrana: " + str(kwoty[nr_pytania]))
             self.master.destroy()
