@@ -1,4 +1,5 @@
-### Data stworzenia: 03.06.2020
+### Data stworzenia: 04.06.2020
+### Połączenie wszystkich części kodu.
 
 import random
 
@@ -100,26 +101,12 @@ class AplikacjaGUI_2(Frame, object):
     #                                           #
     #===========================================#
 
-    #===========================================#
-    #     def podstawowych elementów okna       #
-    #     programu, tzn. ich położenie          #
-    #              kolor tła itd.               #
-    #===========================================#
-
-
     def Prowadzacy(self, master):
-        self.Hubert = Frame(self.master, bg = "white")
-        self.Hubert.place(x = 0, y = 0, width = 600, height = 350)
-
-
-        # Tło: wstępnie ustawione jako białe; oczywiście można zupełnie to zmienić.
-        # Pozostawiam decyzję osobie zajmującej się Hubertem.
-
-    #
-    #
-    #            Hubert
-    #
-    ############################################################################
+        self.Hubert = Canvas(self.master)
+        self.Hubert.place(x = 100, y = 0, width = 600, height = 350)
+        self.zdj_Huberta = Image.open("Hubert.jpg")
+        self.zdj_Huberta_Tk = ImageTk.PhotoImage(self.zdj_Huberta)
+        self.Hubert.create_image(200, 200, image = self.zdj_Huberta_Tk)
 
     def Kola_Ratunkowe(self, master):
     #=====#
@@ -247,11 +234,6 @@ class AplikacjaGUI_2(Frame, object):
     #             elementów okna.               #
     #===========================================#
 
-    #===========================================#
-    #          Poniżej: funkcje związane        #
-    #  z działaniem gry (część dynamiczna).     #
-    #===========================================#
-
     # 1: poczatek_gry
     # -> wywołuje funckję czyszczącą pole z pytaniem i 4 odpowiedzi
     # -> zmienia kolor aktualnego pytania na złoty
@@ -262,9 +244,28 @@ class AplikacjaGUI_2(Frame, object):
     def poczatek_gry(self, nr_pytania):
         self.czyszczenie_pol()
         self.guziki[nr_pytania].configure(bg = "#852EBA")
+        self.komentarz_Huberta(nr_pytania)
         self.nowe_pytanie(nr_pytania)
         self.guziki[nr_pytania].configure(state = DISABLED)
         self.wlacz_kola(nr_pytania)
+
+#==========#
+    def komentarz_Huberta(self, nr_pytania):
+        komentarze = ["Pierwsze pytanie:", "Prawidłowo. Oto kolejne pytanie:",
+        "Zgadza się. Następne pytanie:",
+        "Całkiem nieźle sobie radzisz! Przejdźmy do następnego pytania:",
+        "I to jest poprawna odpowiedź! Następne pytanie:",
+        "Wygląda na to, że połowa juz za nami. A oto kolejne pytanie:",
+        "Zgadza się. Następne pytanie:",
+        "I to jest poprawna odpowiedź! Następne pytanie:",
+        "Prawidłowo. Oto kolejne pytanie:",
+        "To pytanie nie należało do najłatwiejszych, gratuluję. Tak brzmi kolejne pytanie:"
+        "To wielka chwila, od miliona dzieli Cię ostatnie pytanie. Gotów? Brzmi ono tak:",
+        "Gratulacje! Właśnie wygrałeś milion polskich złotych!"]
+
+        komentarz = Label(self.master, text = komentarze[nr_pytania], bg='gold')
+        komentarz.place(x=50, y=345, width=475, height=55)
+#==========#
 
     # 2: czyszczenie_pol
     # -> czysci pole z pytaniem i 4 pola z odpowiedziami
@@ -333,10 +334,13 @@ class AplikacjaGUI_2(Frame, object):
                     self.odpowiedzi[i].configure(bg = "red", command = "")
                     self.przegrana(nr_pytania)
 
+    #==========#
+
     # 8: info_dobra_odpowiedz
     # -> okienko z informacją o poprawnej odpowiedzi
     # (o tym może informować Hubert, ale wstępnie jest)
     # -> zmienia tło zdobytych $$$ na złoty kolor.
+    #==========#
 
     def info_dobra_odpowiedz(self, nr_pytania):
         pygame.mixer.music.load("aplauz.wav")
