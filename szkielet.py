@@ -252,6 +252,7 @@ class AplikacjaGUI_2(Frame, object):
 #==========#
     def komentarz_Huberta(self, nr_pytania):
         komentarze = ["Pierwsze pytanie:", "Prawidłowo. Oto kolejne pytanie:",
+        "Prawidłowo. Oto kolejne pytanie:",
         "Zgadza się. Następne pytanie:",
         "Całkiem nieźle sobie radzisz! Przejdźmy do następnego pytania:",
         "I to jest poprawna odpowiedź! Następne pytanie:",
@@ -261,7 +262,7 @@ class AplikacjaGUI_2(Frame, object):
         "Prawidłowo. Oto kolejne pytanie:",
         "To pytanie nie należało do najłatwiejszych, gratuluję. Tak brzmi kolejne pytanie:"
         "To wielka chwila, od miliona dzieli Cię ostatnie pytanie. Gotów? Brzmi ono tak:",
-        "Gratulacje! Właśnie wygrałeś milion polskich złotych!"]
+        "Gratulacje! Właśnie grasz o milion polskich złotych!"]
 
         komentarz = Label(self.master, text = komentarze[nr_pytania], bg='gold')
         komentarz.place(x=50, y=345, width=475, height=55)
