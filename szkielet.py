@@ -1,69 +1,88 @@
 ### Data stworzenia: 04.06.2020
 ### Połączenie wszystkich części kodu.
+#============================================================#
 
 import random
 
 from tkinter import *
 from tkinter import messagebox
-from functools import partial
-from Pytanka import pytania_all # zaimportowanie pytań z zewnętrznego pliku
-from Pytanka import odpowiedzi_all # zaimportowanie odpowiedzi z zewnętrznego pliku
-from Pytanka import sprawdzenie_all # zaimportowanie odpowiedzi z zewnętrznego pliku
-from PIL import Image, ImageTk # dodawanie obrazków
-import tkinter.font as font # czcionki
-import pygame # do dźwięku
+
+from functools import partial # Więcej niż jeden argument dla "command".
+from Pytanka import pytania_all # Zaimportowanie pytań z zewnętrznego pliku.
+from Pytanka import odpowiedzi_all # Zaimportowanie odpowiedzi z zewnętrznego pliku.
+from Pytanka import sprawdzenie_all # Zaimportowanie odpowiedzi z zewnętrznego pliku.
+from PIL import Image, ImageTk # Dodawanie obrazków.
+import tkinter.font as font # Czcionki.
+import pygame # Dźwięk.
 pygame.mixer.init()
+
+#============================================================#
 
 # EKRAN STARTOWY:
 class AplikacjaGUI_1(Frame, object):
     def __init__(self, master):
         super(AplikacjaGUI_1, self).__init__(master)
-        self.master.title("Milionerzy.")
-        self.master.geometry("900x650")
-        self.master.resizable(width = False, height = False)
-        self.stworzWidgety(master)
+        tworz_okno(master)
+        self.stworz_przyciski(master)
         pygame.mixer.music.load("muzyczka_startowa.mp3")
-        pygame.mixer.music.play()
+        pygame.mixer.music.play() # Muzyka zaczyna grać.
 
-    def stworzWidgety(self, master):
+    def stworz_przyciski(self, master):
 
-        czcionka_1 = font.Font(family="Naula", size=15, weight="bold", slant="italic")
+        specjalna_czcionka = font.Font(family="Naula", size=15, weight="bold", slant="italic")
 
         nowa_gra = Button(self.master, text = "NOWA GRA", relief = RAISED,
                           fg = "#ffd750", bg = "#19133d", command = self.zacznij_gre)
-        nowa_gra['font'] = czcionka_1
+        nowa_gra['font'] = specjalna_czcionka # Zapis z internetowego poradnika.
         nowa_gra.place(x = 350, y = 225, width=200, height=75)
 
         koniec = Button(self.master,text = "WYJŚCIE \nZ PROGRAMU", relief = RAISED,
                         fg = "#ffd750", bg = "#19133d", command = self.zamknij_program)
-        koniec['font'] = czcionka_1
+        koniec['font'] = specjalna_czcionka # Zapis z internetowego poradnika.
         koniec.place(x = 350, y = 310, width=200, height=75)
 
     def zacznij_gre(self):
-        self.master.destroy()
-        pygame.mixer.music.fadeout(2000)
+        self.master.destroy() # Zamknięcie okna startowego.
+        pygame.mixer.music.fadeout(2000) # Muzyka się wycisza (czas).
         Glowne_Okno = Tk()
+
+#============================================================#
+
+        # LOSOWANIE 12 PYTAŃ DO AKTUALNEJ ROZGRYWKI:
+
+            #========================================#
+            #                                        #
+            #             by: Marysia                #
+            #                                        #
+            #========================================#
 
         rozgrywka_pytania = []
         rozgrywka_odpowiedzi = []
         rozgrywka_sprawdzenie = []
         wylosowane_pytania = []
 
-        for i in range(12): # do gry potrzebujemy tylko 12 pytań
+        # 12, bo do gry potrzebujemy tylko 12 pytań (0-11).
+        for i in range(12):
+            # Losujemy z 40 pytań (0-39).
             numer_pytania = random.randint(0,39)
-            while numer_pytania in wylosowane_pytania: # nie może wylosować 2 razy tego samego pytania
+            # Nie może być 2 razy tego samego pytania.
+            while numer_pytania in wylosowane_pytania:
+
                 numer_pytania = random.randint(0,39)
             wylosowane_pytania.append(numer_pytania)
             rozgrywka_pytania.append(pytania_all[numer_pytania])
             rozgrywka_odpowiedzi.append(odpowiedzi_all[numer_pytania])
             rozgrywka_sprawdzenie.append(sprawdzenie_all[numer_pytania])
 
-        ekran_2 = AplikacjaGUI_2(Glowne_Okno, rozgrywka_pytania, rozgrywka_odpowiedzi, rozgrywka_sprawdzenie) # wywołanie klasy
+        # Tutaj przechodzimy do drugiej klasy (przrzucamy tam też wylosowane pytania itd.).
+        ekran_2 = AplikacjaGUI_2(Glowne_Okno, rozgrywka_pytania, rozgrywka_odpowiedzi, rozgrywka_sprawdzenie)
         Glowne_Okno.mainloop()
 
+    # Zakończenie gry z poziomu menu.
     def zamknij_program(self):
         self.master.destroy()
 
+#============================================================#
 
 # GŁÓWNE OKNO:
 class AplikacjaGUI_2(Frame, object):
@@ -76,19 +95,16 @@ class AplikacjaGUI_2(Frame, object):
 
     def __init__(self, master, pyt, odp, spr):
         super(AplikacjaGUI_2, self).__init__(master)
-        self.master.title("Milionerzy.") # "Nazwa okna, w którym wyświetla się program".
-        self.master.geometry("900x650") # "szerokośćxwysokość"
-        self.master.resizable(width = False, height = False) # Okno ma stały rozmiar.
+        tworz_okno(master)
 
-        # Główne obszary okna:
-        # Prowadzący Aktualne_Pytanie, Warianty_Odpowiedzi,
-        # Guziki_z_Wygranymi i Kola_Ratunkowe.
-
+        # Elementy wylosowane, przeniesione z poprzedniej klasy:
         self.pula_pytan = pyt
         self.pula_odpowiedzi = odp
         self.pula_sprawdzen = spr
 
-
+        # Główne obszary okna:
+        # Prowadzący Aktualne_Pytanie, Warianty_Odpowiedzi,
+        # Guziki_z_Wygranymi i Kola_Ratunkowe.
         self.Prowadzacy(master)
         self.Aktualne_Pytanie(master)
         self.Warianty_Odpowiedzi(master)
@@ -101,6 +117,15 @@ class AplikacjaGUI_2(Frame, object):
     #                                           #
     #===========================================#
 
+#============================================================#
+
+            #========================================#
+            #                                        #
+            #               by: Damian               #
+            #                                        #
+            #========================================#
+
+
     def Prowadzacy(self, master):
         self.Hubert = Canvas(self.master)
         self.Hubert.place(x = 100, y = 0, width = 600, height = 350)
@@ -109,7 +134,7 @@ class AplikacjaGUI_2(Frame, object):
         self.Hubert.create_image(200, 200, image = self.zdj_Huberta_Tk)
 
     def Kola_Ratunkowe(self, master):
-    #=====#
+
         self.publ_obraz = Image.open("1.png")
         self.publ_obraz = self.publ_obraz.resize((60, 50))
         self.publ_Tk = ImageTk.PhotoImage(self.publ_obraz)
@@ -121,7 +146,14 @@ class AplikacjaGUI_2(Frame, object):
         self.tel_obraz = Image.open("3.png")
         self.tel_obraz = self.tel_obraz.resize((60, 50))
         self.tel_Tk = ImageTk.PhotoImage(self.tel_obraz)
-    #=====#
+
+#============================================================#
+
+            #========================================#
+            #                                        #
+            #              by: Jakub                 #
+            #                                        #
+            #========================================#
 
         self.przycisk_publ=Button(self.master, text = "publ", image = self.publ_Tk, relief = RAISED, state = DISABLED, bg = "#0F0A8C", fg = "white")
         self.przycisk_publ.place(x = 650 , y = 50, width=60, height=50)
@@ -132,7 +164,6 @@ class AplikacjaGUI_2(Frame, object):
         self.czy_wykorzystano_publ = False
         self.czy_wykorzystano_pol = False
         self.czy_wykorzystano_tel = False
-
 
     def wylacz_kola(self):
         self.przycisk_publ.configure(state = DISABLED)
@@ -195,9 +226,9 @@ class AplikacjaGUI_2(Frame, object):
         messagebox.showinfo("Telefon do przyjaciela", "Przyjaciel uważa, że prawdidłowa odpowiedź to: "+odpowiedz)
         self.czy_wykorzystano_tel = True
         self.przycisk_tel.configure(state = DISABLED)
-        #######
         #dodalem jeszcze linijke do funkcji poczatek_gry()
-    #============================================================#
+
+#============================================================#
 
     def Aktualne_Pytanie(self, master):
         self.pytanie = Button(self.master, text = "", relief = RAISED, bg = "#0F0A8C", fg = "white")
@@ -227,10 +258,10 @@ class AplikacjaGUI_2(Frame, object):
                 self.guziki[i].configure(state = NORMAL)
             self.guziki[-1].place(x = 650, y = 562.5 - 40*i, width=200, height=37.5)
 
-    #============================================================#
+#============================================================#
 
     #===========================================#
-    #          Koniec def podstawowych          #
+    #          Koniec def. podstawowych         #
     #             elementów okna.               #
     #===========================================#
 
@@ -249,7 +280,7 @@ class AplikacjaGUI_2(Frame, object):
         self.guziki[nr_pytania].configure(state = DISABLED)
         self.wlacz_kola(nr_pytania)
 
-#==========#
+#============================================================#
     def komentarz_Huberta(self, nr_pytania):
         komentarze = ["Pierwsze pytanie:", "Prawidłowo. Oto kolejne pytanie:",
         "Prawidłowo. Oto kolejne pytanie:",
@@ -266,7 +297,8 @@ class AplikacjaGUI_2(Frame, object):
 
         komentarz = Label(self.master, text = komentarze[nr_pytania], bg='gold')
         komentarz.place(x=50, y=345, width=475, height=55)
-#==========#
+#============================================================#
+
     # 2: czyszczenie_pol
     # -> czysci pole z pytaniem i 4 pola z odpowiedziami
 
@@ -277,8 +309,6 @@ class AplikacjaGUI_2(Frame, object):
     # 3: nowe_pytanie
     # -> wywołuje bazę pytań
     # -> wywołuję bazę odpowiedzi
-    # na razie nie mamy jeszcze pytań i odpowiedzi
-    # więc dałam przykładowe pytania
 
     def nowe_pytanie(self, nr_pytania):
         self.baza_pytan(nr_pytania)
@@ -297,12 +327,12 @@ class AplikacjaGUI_2(Frame, object):
     def baza_odpowiedzi(self, nr_pytania):
         # for i in range(4):
         #     self.odpowiedzi[i].configure(text = self.pula_odpowiedzi[nr_pytania][i])
+        # Zrobione poza pętlą, żeby "lambda" odpowiednio działała
 
         self.master.after(1000, lambda: self.odpowiedzi[0].configure(text = self.pula_odpowiedzi[nr_pytania][0]))
         self.master.after(2000, lambda: self.odpowiedzi[1].configure(text = self.pula_odpowiedzi[nr_pytania][1]))
         self.master.after(3000, lambda: self.odpowiedzi[2].configure(text = self.pula_odpowiedzi[nr_pytania][2]))
         self.master.after(4000, lambda: self.odpowiedzi[3].configure(text = self.pula_odpowiedzi[nr_pytania][3]))
-
         self.sprawdz_odpowiedz(nr_pytania)
 
     # 6: sprawdz_odpowiedz
@@ -315,6 +345,7 @@ class AplikacjaGUI_2(Frame, object):
                 self.odpowiedzi[i].configure(command = partial(self.reakcja_odpowiedz, i, "prawidłowa", nr_pytania))
             else:
                 self.odpowiedzi[i].configure(command = partial(self.reakcja_odpowiedz, i, "nieprawidłowa", nr_pytania))
+
     # 7: reakcja_odpowiedz
     # -> zmienia kolor naciśniętej odpowiedzi
     #    na zielono, jeśli odpowiedź jest dobra
@@ -334,13 +365,9 @@ class AplikacjaGUI_2(Frame, object):
                     self.odpowiedzi[i].configure(bg = "red", command = "")
                     self.przegrana(nr_pytania)
 
-    #==========#
-
     # 8: info_dobra_odpowiedz
     # -> okienko z informacją o poprawnej odpowiedzi
-    # (o tym może informować Hubert, ale wstępnie jest)
-    # -> zmienia tło zdobytych $$$ na złoty kolor.
-    #==========#
+    # -> zmienia tło zdobytych $$$ na złoty kolor
 
     def info_dobra_odpowiedz(self, nr_pytania):
         pygame.mixer.music.load("aplauz.wav")
@@ -369,8 +396,15 @@ class AplikacjaGUI_2(Frame, object):
             self.master.destroy()
             ekran_startowy()
 
+    # 10: zwolnij_guzik
+    # -> zwalnia guzik odpowiadający kolejnemu pytaniu
+
     def zwolnij_guzik(self, nr_do_zwolnienia):
         self.guziki[nr_do_zwolnienia].configure(state = NORMAL)
+
+    # 11: jestes_milionerem
+    # -> informuje o byciu milionerem
+    # -> aplauz
 
     def jestes_milionerem(self):
         pygame.mixer.music.load("aplauz.wav")
@@ -379,7 +413,7 @@ class AplikacjaGUI_2(Frame, object):
         self.master.destroy()
         ekran_startowy()
 
-    # 10: przegrana
+    # 12: przegrana
     # -> okienko z informacją o przegranej
     # -> zamyka główne okno
 
@@ -394,6 +428,10 @@ class AplikacjaGUI_2(Frame, object):
         messagebox.showinfo("PORAŻKA", "Przegrałeś :( Poprawna odpowiedź: " + str(poprawna_odpowiedz))
         self.informacja_o_wygranej(nr_pytania)
 
+    # 13: informacja_o_wygranej
+    # -> podaje wygraną kwotę;
+    # -> bierze pod uwagę sumy gwarantowane
+
     def informacja_o_wygranej(self, nr_pytania):
         if nr_pytania < 2:
             messagebox.showinfo("WYGRANA", "Twoja wygrana: 0 zł")
@@ -403,13 +441,31 @@ class AplikacjaGUI_2(Frame, object):
             messagebox.showinfo("WYGRANA", "Twoja wygrana: gwarantowane 40 000 zł")
         self.master.destroy()
         ekran_startowy()
-#==========================================================#
+#============================================================#
 
-# Poza klasą: funkcja tworząca okienko i wywołująca klasę.
+# Poza klasami: funkcja wywołująca pierwszą klasę,
+# funkcja umieszczająca okna na środku ekranu.
 
 def ekran_startowy():
     Okno_Startowe = Tk()
     ekran_1 = AplikacjaGUI_1(Okno_Startowe)
     Okno_Startowe.mainloop()
 
+# Tworzenie 2 okien, na środku ekranu:
+def tworz_okno(master):
+        master.title("Milionerzy.")
+        master.resizable(width = False, height = False)
+        szerokosc_ekranu = master.winfo_screenwidth()
+        wysokosc_ekranu = master.winfo_screenheight()
+        wspolrzedna_x = int((szerokosc_ekranu/2) - (900/2))
+        wspolrzedna_y = int((wysokosc_ekranu/2) - (650/2))
+        master.geometry("{}x{}+{}+{}".format(900, 650, wspolrzedna_x, wspolrzedna_y))
+        # Powyższy zapis pozwala wyśrodkować okno na ekranie użytkownika.
+        # Współrzędna "x" punktu zaczepienia: szerokość ekranu / 2 - szerokość okna /2.
+        # Współrzędna "y" punktu zaczepienia: wysokość ekranu / 2 - wysokość okna /2.
+        # Ostatnia linijka pozwala "wstawić" wartości w odpowiednie miejsca zapisu "szerokośćxdługość+x+y".
+
+#============================================================#
+
+# Uruchomienie programu:
 ekran_startowy()
