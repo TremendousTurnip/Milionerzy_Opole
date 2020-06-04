@@ -267,7 +267,6 @@ class AplikacjaGUI_2(Frame, object):
         komentarz = Label(self.master, text = komentarze[nr_pytania], bg='gold')
         komentarz.place(x=50, y=345, width=475, height=55)
 #==========#
-
     # 2: czyszczenie_pol
     # -> czysci pole z pytaniem i 4 pola z odpowiedziami
 
