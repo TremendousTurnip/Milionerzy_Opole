@@ -23,9 +23,9 @@ Projekt symulatora teleturnieju ***Milionerzy*** autorstwa grupy ***Opole***.
 
 **Źródło ikonek:** </br>
 
-Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a><br /> 
-Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a><br /> 
-Icons made by <a href="https://www.flaticon.com/authors/alfredo-hernandez" title="Alfredo Hernandez">Alfredo Hernandez</a><br /> 
+By <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a><br /> 
+By <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a><br /> 
+By <a href="https://www.flaticon.com/authors/alfredo-hernandez" title="Alfredo Hernandez">Alfredo Hernandez</a><br /> 
 From: <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
 
 
