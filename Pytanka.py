@@ -19,12 +19,12 @@ p3_odp = ["A. USA", "B. Kanady ", "C. Australii ", "D. Nowej Zelandii"]
 p3_s = ["nie", "nie", "tak", "nie"]
 
 # PYTANIE 4
-p4 = "Która z liter jest międzynarodowym symbolem zachodu jako strony świata?"
+p4 = "Która z liter jest międzynarodowym symbolem \nzachodu jako strony świata?"
 p4_odp = ["A. N ", "B. S ", "C. E ", "D. W"]
 p4_s = ["nie", "nie", "nie", "tak"]
 
 # PYTANIE 5
-p5 = "Jaki podatek zapłaci w Polsce osoba fizyczna, jeśli wpadnie w pierwszy próg podatkowy?"
+p5 = "Jaki podatek zapłaci w Polsce osoba fizyczna, \njeśli wpadnie w pierwszy próg podatkowy?"
 p5_odp = ["A. 17 procent ", "B. 19 procent", "C. 32 procent ", "D. 44 procent"]
 p5_s = ["tak", "nie", "nie", "nie"]
 
@@ -44,12 +44,12 @@ p8_odp = ["A. Wenus", "B. Merkurego", "C. Jowisza", "D. Marsa"]
 p8_s = ["nie", "nie", "nie", "tak"]
 
 # PYTANIE 9
-p9 = "Stosowany w państwach o ustroju totalitarnym sposób ingerowania w zycie prywatne obywateli, a także dyskretny nadzór nad osobą, grupą, organizacją poprzez systematyczną obserwację agentów to:"
+p9 = "Stosowany w państwach o ustroju totalitarnym sposób ingerowania w życie \nprywatne obywateli, a także dyskretny nadzór nad osobą, grupą, organizacją poprzez systematyczną obserwację agentów to:"
 p9_odp = ["A. Inwigilacja", "B. Denominacja", "C. Autokratyzm", "D. Referendum"]
 p9_s = ["tak", "nie", "nie", "nie"]
 
 # PYTANIE 10
-p10 = "Które światła powinien mieć włączony samochód, który jest holowany podczas złej widoczności?"
+p10 = "Które światła powinien mieć włączony samochód, który jest \nholowany podczas złej widoczności?"
 p10_odp = ["A. Stopu", "B. Pozycyjne ", "C. Awaryjne", "D. Drogowe"]
 p10_s = ["nie", "tak", "nie", "nie"]
 
@@ -59,7 +59,7 @@ p11_odp = ["A. Dzikich koni", "B. Afrykańskich lwów", "C. Hien cętkowanych ",
 p11_s = ["nie", "nie", "tak", "nie"]
 
 # PYTANIE 12
-p12 = "CMYK-cyan, magenta, yellow, key - jest to zestaw podstawowych kolorów farb drukarskich. Co oznacza key?"
+p12 = "CMYK-cyan, magenta, yellow, key - jest to zestaw podstawowych kolorów \nfarb drukarskich. Co oznacza key?"
 p12_odp = ["A. Brązowy", "B. Czerwony", "C. Biały", "D. Czarny"]
 p12_s = ["nie", "nie", "nie", "tak"]
 
@@ -115,7 +115,7 @@ p22_s = ["nie", "tak", "nie", "nie"]
 
 # PYTANIE 23
 p23 = "Dokończ przysłowie: Zapomniał wół..."
-p23_odp = ["A. , że bez pracy nie ma kołaczy", "B. kto się śmieje ostatni", "C. kiedy cielęciem był", "D. , że lepiej późno niż wcale"]
+p23_odp = ["A. [...], że bez pracy \nnie ma kołaczy", "B. kto się śmieje ostatni", "C. kiedy cielęciem był", "D. [...], że lepiej \npóźno niż wcale"]
 p23_s = ["nie", "nie", "tak", "nie"]
 
 # PYTANIE 24
@@ -150,12 +150,12 @@ p29_s = ["tak", "nie", "nie", "nie"]
 
 # PYTANIE 30
 p30 = "W którym muzeum znajduje się posąg Wenus z Milo?"
-p30_odp = ["A. W muzeum archeologicznym w Nowym Jorku", "B. W muzeum Archeologicznym w Atenach ", "C. W Muzeum Brytyjskim", "D. W Luwrze"]
+p30_odp = ["A. W Muzeum Archeologicznym \nw Nowym Jorku", "B. W muzeum Archeologicznym \nw Atenach ", "C. W Muzeum \nBrytyjskim", "D. W Luwrze"]
 p30_s = ["nie", "nie", "nie", "tak"]
 
 # PYTANIE 31
 p31 = "\"Lubię, kiedy kobieta\" to erotyk napisany przez:"
-p31_odp = ["A. Leopolda Staffa", "B. Bolesława Leśmiana", "C. Kazimierza Przerwę-Tetmajera", "D. Jana Kochanowskiego"]
+p31_odp = ["A. Leopolda Staffa", "B. Bolesława Leśmiana", "C. Kazimierza \nPrzerwę-Tetmajera", "D. Jana \nKochanowskiego"]
 p31_s = ["nie", "nie", "tak", "nie"]
 
 # PYTANIE 32
@@ -174,12 +174,12 @@ p34_odp = ["A. Na powiekach ", "B. Na wardze", "C. Na nadgarstkach", "D. Na stop
 p34_s = ["tak", "nie", "nie", "nie"]
 
 # PYTANIE 35
-p35 = "Flaga, którego z wymienionych państw posiada taką samą kolorystykę co flaga Polski?"
+p35 = "Flaga, którego z wymienionych państw posiada taką samą kolorystykę \nco flaga Polski?"
 p35_odp = ["A. Monako", "B. Szwecji", "C. Maroka ", "D. Chile"]
 p35_s = ["tak", "nie", "nie", "nie"]
 
 # PYTANIE 36
-p36 = "Rzeka Tag przepływa przez jedną ze stolic państw Unii Europejskiej. Przez którą?"
+p36 = "Rzeka Tag przepływa przez jedną ze stolic państw Unii Europejskiej. \nPrzez którą?"
 p36_odp = ["A. Lizbonę", "B. Wiedeń", "C.Brukselę", "D. Madryt"]
 p36_s = ["tak", "nie", "nie", "nie"]
 
@@ -195,7 +195,7 @@ p38_s = ["nie", "nie", "tak", "nie"]
 
 # PYTANIE 39
 p39 = "Co oznacza określenie \"krewny po kądzieli\"?"
-p39_odp = ["A. Krewny ze strony ojca", "B. Krewny ze strony matki", "C. Daleki krewny (pociotek)", "D. Kuzyn cioteczny"]
+p39_odp = ["A. Krewny ze strony ojca", "B. Krewny ze strony matki", "C. Daleki krewny \n(pociotek)", "D. Kuzyn cioteczny"]
 p39_s = ["nie", "tak", "nie", "nie"]
 
 # PYTANIE 40
