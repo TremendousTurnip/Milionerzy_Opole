@@ -44,7 +44,7 @@ p8_odp = ["A. Wenus", "B. Merkurego", "C. Jowisza", "D. Marsa"]
 p8_s = ["nie", "nie", "nie", "tak"]
 
 # PYTANIE 9
-p9 = "Stosowany w państwach o ustroju totalitarnym sposób ingerowania w życie \nprywatne obywateli, a także dyskretny nadzór nad osobą, grupą, organizacją poprzez systematyczną obserwację agentów to:"
+p9 = "Stosowany w państwach o ustroju totalitarnym sposób ingerowania w życie \nprywatne obywateli, a także dyskretny nadzór nad osobą, grupą, organizacją \npoprzez systematyczną obserwację agentów to:"
 p9_odp = ["A. Inwigilacja", "B. Denominacja", "C. Autokratyzm", "D. Referendum"]
 p9_s = ["tak", "nie", "nie", "nie"]
 
