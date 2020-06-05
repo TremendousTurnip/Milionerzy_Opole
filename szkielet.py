@@ -1,4 +1,4 @@
-### Data stworzenia: 04.06.2020
+### Ostateczny update: 05.06.2020
 ### Połączenie wszystkich części kodu.
 #============================================================#
 
@@ -209,7 +209,7 @@ class AplikacjaGUI_2(Frame, object):
                 pytania.remove(i)
         losowa_bledna = random.randint(0,2)
         bledna = self.pula_odpowiedzi[nr_pytania][pytania[losowa_bledna]]
-        messagebox.showinfo("Pol na pol", "Odpowiedź to "+ prawidlowa+"lub "+ bledna)
+        messagebox.showinfo("Pol na pol", "Odpowiedź to "+ prawidlowa+" lub "+ bledna)
         self.czy_wykorzystano_pol = True
         self.przycisk_5050.configure(state = DISABLED)
 
@@ -303,14 +303,13 @@ class AplikacjaGUI_2(Frame, object):
         komentarze = ["Pierwsze pytanie:", "Prawidłowo. Oto kolejne pytanie:",
         "Prawidłowo. Oto kolejne pytanie:",
         "Zgadza się. Następne pytanie:",
-        "Całkiem nieźle sobie radzisz! Przejdźmy do następnego pytania:",
+        "Całkiem nieźle sobie radzisz! Przejdźmy \ndo następnego pytania:",
         "I to jest poprawna odpowiedź! Następne pytanie:",
-        "Wygląda na to, że połowa juz za nami. A oto kolejne pytanie:",
+        "Wygląda na to, że połowa juz za nami. \nA oto kolejne pytanie:",
         "Zgadza się. Następne pytanie:",
         "I to jest poprawna odpowiedź! Następne pytanie:",
-        "Prawidłowo. Oto kolejne pytanie:",
-        "To pytanie nie należało do najłatwiejszych, gratuluję. Tak brzmi kolejne pytanie:"
-        "To wielka chwila, od miliona dzieli Cię ostatnie pytanie. Gotów? Brzmi ono tak:",
+        "To pytanie nie należało do najłatwiejszych, \ngratuluję. Tak brzmi kolejne pytanie:",
+        "To wielka chwila, od miliona dzieli Cię przedostatnie \npytanie. Gotów? Brzmi ono tak:",
         "Gratulacje! Właśnie grasz o milion polskich złotych!"]
 
         komentarz = Label(self.master, text = komentarze[nr_pytania], bg='gold')
@@ -442,6 +441,8 @@ class AplikacjaGUI_2(Frame, object):
         pygame.mixer.music.load("aplauz.wav")
         pygame.mixer.music.play()
         messagebox.showinfo("GRATULACJE", "Wygrałeś milion złotych!")
+        pygame.mixer.music.load("aplauz.wav")
+        pygame.mixer.music.play()
         self.master.destroy()
         ekran_startowy()
 
