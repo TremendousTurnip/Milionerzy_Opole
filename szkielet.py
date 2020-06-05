@@ -140,15 +140,15 @@ class AplikacjaGUI_2(Frame, object):
     def Kola_Ratunkowe(self, master):
 
         self.publ_obraz = Image.open("1.png")
-        self.publ_obraz = self.publ_obraz.resize((45, 45))
+        self.publ_obraz = self.publ_obraz.resize((50, 35))
         self.publ_Tk = ImageTk.PhotoImage(self.publ_obraz)
 
         self.pol_na_pol_obraz = Image.open("2.png")
-        self.pol_na_pol_obraz = self.pol_na_pol_obraz.resize((45, 45))
+        self.pol_na_pol_obraz = self.pol_na_pol_obraz.resize((50, 35))
         self.pol_na_pol_Tk = ImageTk.PhotoImage(self.pol_na_pol_obraz)
 
         self.tel_obraz = Image.open("3.png")
-        self.tel_obraz = self.tel_obraz.resize((45, 45))
+        self.tel_obraz = self.tel_obraz.resize((50, 35))
         self.tel_Tk = ImageTk.PhotoImage(self.tel_obraz)
 
 #============================================================#
